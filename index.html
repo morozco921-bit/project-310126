@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PROJECT_310126</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background: #050505;
+
+            color: #d7d7d7;
+
+            font-family: "Courier New", monospace;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            overflow-x: hidden;
+
+        }
+
+
+        .terminal {
+
+            width: 92%;
+
+            max-width: 950px;
+
+            min-height: 580px;
+
+            background: #080808;
+
+            border: 1px solid #292929;
+
+            padding: 40px;
+
+            box-shadow:
+                0 0 40px rgba(255,255,255,0.025),
+                inset 0 0 30px rgba(255,255,255,0.01);
+
+            transition: all 1s ease;
+
+        }
+
+
+        .top {
+
+            color: #666;
+
+            font-size: 12px;
+
+            margin-bottom: 28px;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .title {
+
+            font-size: 30px;
+
+            color: white;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .line {
+
+            margin: 14px 0;
+
+        }
+
+
+        .green {
+
+            color: #7cff8a;
+
+        }
+
+
+        .red {
+
+            color: #ff6b6b;
+
+        }
+
+
+        .gray {
+
+            color: #777;
+
+        }
+
+
+        input {
+
+            background: transparent;
+
+            border: none;
+
+            border-bottom: 1px solid #555;
+
+            color: #7cff8a;
+
+            font-family: "Courier New", monospace;
+
+            font-size: 16px;
+
+            outline: none;
+
+            width: 180px;
+
+            margin-top: 10px;
+
+            padding: 5px;
+
+        }
+
+
+        button {
+
+            background: transparent;
+
+            border: 1px solid #555;
+
+            color: #d7d7d7;
+
+            font-family: "Courier New", monospace;
+
+            padding: 11px 22px;
+
+            margin-top: 25px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+        button:hover {
+
+            border-color: #7cff8a;
+
+            color: #7cff8a;
+
+            box-shadow: 0 0 15px rgba(124,255,138,0.08);
+
+        }
+
+
+        .hidden {
+
+            display: none;
+
+        }
+
+
+        .file {
+
+            margin: 15px 0;
+
+            padding-left: 10px;
+
+        }
+
+
+        .locked {
+
+            color: #777;
+
+        }
+
+
+        .readme {
+
+            border-left: 2px solid #7cff8a;
+
+            padding-left: 25px;
+
+            line-height: 1.8;
+
+            margin-top: 30px;
+
+        }
+
+
+        .story {
+
+            line-height: 2;
+
+            max-width: 780px;
+
+            font-size: 16px;
+
+        }
+
+
+        .story-space {
+
+            height: 25px;
+
+        }
+
+
+        .small-space {
+
+            height: 12px;
+
+        }
+
+
+        .typing {
+
+            min-height: 430px;
+
+        }
+
+
+        .cursor {
+
+            display: inline-block;
+
+            width: 8px;
+
+            height: 18px;
+
+            background: #7cff8a;
+
+            animation: blink 1s infinite;
+
+            vertical-align: middle;
+
+        }
+
+
+        .center {
+
+            text-align: center;
+
+            margin-top: 100px;
+
+        }
+
+
+        .date {
+
+            font-size: 22px;
+
+            letter-spacing: 3px;
+
+            color: #7cff8a;
+
+        }
+
+
+        /* =========================
+           NUEVA INTERFAZ
+        ========================= */
+
+
+        .fade {
+
+            animation: fadeIn 1.2s ease forwards;
+
+        }
+
+
+        .soft-fade {
+
+            animation: softFade 1.8s ease forwards;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(10px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        @keyframes softFade {
+
+            from {
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        .memory-card {
+
+            border: 1px solid #292929;
+
+            background: #0b0b0b;
+
+            padding: 28px;
+
+            margin: 25px 0;
+
+            box-shadow: 0 0 25px rgba(255,255,255,0.02);
+
+        }
+
+
+        .memory-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            color: #777;
+
+            font-size: 12px;
+
+            margin-bottom: 25px;
+
+            border-bottom: 1px solid #202020;
+
+            padding-bottom: 15px;
+
+        }
+
+
+        .memory-number {
+
+            color: #7cff8a;
+
+        }
+
+
+        .quote {
+
+            font-size: 20px;
+
+            line-height: 2;
+
+            color: white;
+
+            padding: 15px 5px;
+
+        }
+
+
+        .profile {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+            margin-top: 25px;
+
+        }
+
+
+        .profile-item {
+
+            border: 1px solid #242424;
+
+            padding: 18px;
+
+            background: #090909;
+
+            min-height: 90px;
+
+        }
+
+
+        .profile-label {
+
+            font-size: 11px;
+
+            color: #666;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .profile-value {
+
+            color: #d7d7d7;
+
+            line-height: 1.6;
+
+        }
+
+
+        .progress {
+
+            width: 100%;
+
+            height: 2px;
+
+            background: #222;
+
+            margin-top: 25px;
+
+            overflow: hidden;
+
+        }
+
+
+        .progress-bar {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: #7cff8a;
+
+            animation: progress 2.5s ease forwards;
+
+        }
+
+
+        @keyframes progress {
+
+            from {
+
+                width: 0%;
+
+            }
+
+            to {
+
+                width: 100%;
+
+            }
+
+        }
+
+
+        .big-message {
+
+            font-size: 24px;
+
+            line-height: 2;
+
+            color: white;
+
+            max-width: 760px;
+
+            margin: 80px auto;
+
+            text-align: center;
+
+        }
+
+
+        .letter {
+
+            max-width: 760px;
+
+            margin: 30px auto;
+
+            line-height: 2.1;
+
+            font-size: 17px;
+
+        }
+
+
+        .letter p {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .final {
+
+            text-align: center;
+
+            margin-top: 100px;
+
+            line-height: 2.2;
+
+        }
+
+
+        .final-name {
+
+            font-size: 25px;
+
+            color: white;
+
+            margin-top: 45px;
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .terminal {
+
+                padding: 25px;
+
+            }
+
+            .profile {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .title {
+
+                font-size: 24px;
+
+            }
+
+        }
+
+
+        @keyframes blink {
+
+            0%, 50% {
+
+                opacity: 1;
+
+            }
+
+            51%, 100% {
+
+                opacity: 0;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="terminal">
+
+
+    <!-- =====================================================
+         LOGIN
+    ====================================================== -->
+
+    <div id="login">
+
+        <div class="top">
+            SISTEMA // ENTORNO PRIVADO
+        </div>
+
+        <div class="title">
+            PROJECT_310126
+        </div>
+
+        <div class="line">
+            Inicializando proyecto...
+        </div>
+
+        <div class="line green">
+            ✓ Sistema inicializado
+        </div>
+
+        <div class="line green">
+            ✓ Dependencias cargadas
+        </div>
+
+        <div class="line green">
+            ✓ Entorno verificado
+        </div>
+
+        <div class="line green">
+            ✓ Usuario detectado
+        </div>
+
+        <div class="line">
+            Autenticación requerida.
+        </div>
+
+        <div class="line">
+            Ingrese la clave de acceso:
+        </div>
+
+        <input
+            type="password"
+            id="accessKey"
+            onkeydown="if(event.key === 'Enter') authenticate()"
+        >
+
+        <br>
+
+        <button onclick="authenticate()">
+            [ INICIALIZAR ]
+        </button>
+
+        <div id="loginMessage" class="line"></div>
+
+        <div class="gray line">
+            PISTA: PROJECT INITIALIZATION DATE: 31.01.2026
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PROYECTO
+    ====================================================== -->
+
+    <div id="project" class="hidden">
+
+        <div class="top">
+            SISTEMA // PROJECT_310126
+        </div>
+
+        <div class="title">
+            PROJECT_310126
+        </div>
+
+        <div class="line green">
+            ACCESS GRANTED.
+        </div>
+
+        <div class="line">
+            Cargando arquitectura del proyecto...
+        </div>
+
+        <div class="line">
+            /PROJECT_310126
+        </div>
+
+        <div class="file">
+            📄 README.md
+        </div>
+
+        <div class="file locked">
+            📁 recuerdos/ [BLOQUEADO]
+        </div>
+
+        <div class="file locked">
+            📁 momentos/ [BLOQUEADO]
+        </div>
+
+        <div class="file locked">
+            📁 admiración/ [BLOQUEADO]
+        </div>
+
+        <div class="file locked">
+            📁 sentimientos/ [BLOQUEADO]
+        </div>
+
+        <div class="file locked">
+            ⚙ sistema/ [BLOQUEADO]
+        </div>
+
+        <button onclick="openReadme()">
+            [ ABRIR README.md ]
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         README
+    ====================================================== -->
+
+    <div id="readme" class="hidden">
+
+        <div class="top">
+            /PROJECT_310126/README.md
+        </div>
+
+        <div class="title">
+            README.md
+        </div>
+
+        <div class="readme">
+
+            <div>
+                Si llegaste hasta aquí,
+                encontraste la primera puerta.
+            </div>
+
+            <div>
+                Pero todavía no sabes
+                qué estás buscando.
+            </div>
+
+            <br>
+
+            <div>
+                Este proyecto fue creado
+                para una sola persona.
+            </div>
+
+            <br>
+
+            <div>
+                Y antes de continuar,
+                hay algo que necesitas saber.
+            </div>
+
+            <br>
+
+            <div>
+                Algunas cosas en la vida
+                no se pueden explicar
+                de inmediato.
+            </div>
+
+            <div>
+                Primero hay que vivirlas.
+            </div>
+
+            <br>
+
+            <div>
+                ¿Estás dispuesto a descubrirlo?
+            </div>
+
+        </div>
+
+        <button onclick="continueProject()">
+            [ CONTINUAR ]
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         HISTORIA
+    ====================================================== -->
+
+    <div id="next" class="hidden">
+
+        <div class="top">
+            SISTEMA // RECUPERACIÓN DE DATOS
+        </div>
+
+        <div id="story" class="typing"></div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    // =====================================================
+    // FUNCIONES BÁSICAS
+    // =====================================================
+
+
+    function wait(ms) {
+
+        return new Promise(resolve => setTimeout(resolve, ms));
+
+    }
+
+
+    function authenticate() {
+
+        const key = document.getElementById("accessKey").value;
+
+        const message = document.getElementById("loginMessage");
+
+
+        if (key === "310126") {
+
+            message.innerHTML =
+                '<span class="green">ACCESS GRANTED.</span><br><br>' +
+                'Bienvenido.<br>' +
+                'Tal vez todavía no sabes dónde estás entrando.';
+
+
+            setTimeout(() => {
+
+                document
+                    .getElementById("login")
+                    .classList
+                    .add("hidden");
+
+
+                document
+                    .getElementById("project")
+                    .classList
+                    .remove("hidden");
+
+            }, 1800);
+
+
+        } else {
+
+            message.innerHTML =
+                '<span class="red">ACCESS DENIED.</span><br>' +
+                'Clave incorrecta.<br>' +
+                '<span class="gray">Pista: algunas fechas cambian una vida.</span>';
+
+        }
+
+    }
+
+
+    function openReadme() {
+
+        document
+            .getElementById("project")
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById("readme")
+            .classList
+            .remove("hidden");
+
+    }
+
+
+    function continueProject() {
+
+        document
+            .getElementById("readme")
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById("next")
+            .classList
+            .remove("hidden");
+
+
+        startStory();
+
+    }
+
+
+    // =====================================================
+    // MEMORIA 001
+    // ORIGEN
+    // =====================================================
+
+
+    async function memoria001(terminal) {
+
+
+        terminal.innerHTML = `
+
+            <div class="gray fade">
+                > Recuperando memoria_001...
+            </div>
+
+        `;
+
+        await wait(1300);
+
+
+        terminal.innerHTML = `
+
+            <div class="gray fade">
+                > Recuperando memoria_001...
+            </div>
+
+            <div class="green fade">
+                [OK]
+            </div>
+
+            <div class="story-space"></div>
+
+            <div class="title fade">
+                ORIGEN
+            </div>
+
+            <div class="date fade">
+                31.01.2026
+            </div>
+
+        `;
+
+        await wait(1700);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_001
+                    </span>
+
+                    <span>
+                        31.01.2026
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Nos conocimos el 31 de enero de 2026,
+                    en una fiesta a la cual ninguno
+                    de los dos iba a ir.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4000);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_001
+                    </span>
+
+                    <span>
+                        ORIGEN
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Sin embargo,
+                    el destino nos puso
+                    en el mismo lugar.
+
+                    <div class="story-space"></div>
+
+                    Ya habíamos estado
+                    en los mismos lugares.
+
+                    <div class="story-space"></div>
+
+                    Teníamos amigos en común.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4000);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_001
+                    </span>
+
+                    <span>
+                        CONCLUSIÓN
+                    </span>
+
+                </div>
+
+                <div class="quote">
+
+                    Nuestras vidas ya se habían cruzado
+                    sin que lo supiéramos.
+
+                    <br><br>
+
+                    Aun así,
+
+                    <br><br>
+
+                    la vida nos tenía reservados
+                    para el momento indicado.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4500);
+
+    }
+
+
+    // =====================================================
+    // MEMORIA 002
+    // CONEXIÓN
+    // =====================================================
+
+
+    async function memoria002(terminal) {
+
+
+        terminal.innerHTML = `
+
+            <div class="gray fade">
+                > Recuperando memoria_002...
+            </div>
+
+        `;
+
+        await wait(1400);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_002
+                    </span>
+
+                    <span>
+                        CONEXIÓN
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Desde ese momento,
+                    empezamos a hablarnos día tras día.
+
+                    <div class="story-space"></div>
+
+                    Y poco a poco nos dimos cuenta
+                    de que no queríamos estar
+                    con nadie más en el mundo.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4500);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_002
+                    </span>
+
+                    <span>
+                        VÍNCULO
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Él se convirtió en mi refugio.
+
+                    <div class="story-space"></div>
+
+                    Me sostuvo con paciencia
+                    en mis momentos más difíciles.
+
+                    <div class="story-space"></div>
+
+                    Amó cada parte de mí
+                    que yo pensaba que estaba rota.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(5000);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_002
+                    </span>
+
+                    <span>
+                        CONFIANZA
+                    </span>
+
+                </div>
+
+                <div class="quote">
+
+                    Creyó en mí
+                    cuando nadie más lo hizo.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4200);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_002
+                    </span>
+
+                    <span>
+                        RESULTADO
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Nos dimos cuenta de que habíamos
+                    vivido experiencias parecidas.
+
+                    <div class="story-space"></div>
+
+                    Que sabíamos amar.
+
+                    <div class="story-space"></div>
+
+                    Que entendíamos lo que podía dolerle
+                    al otro.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4800);
+
+
+        terminal.innerHTML = `
+
+            <div class="center fade">
+
+                <div class="gray">
+                    RESULTADO DEL ANÁLISIS
+                </div>
+
+                <div class="story-space"></div>
+
+                <div class="date">
+                    HOGAR
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(3000);
+
+
+        terminal.innerHTML = `
+
+            <div class="big-message fade">
+
+                No vio en mí una causa perdida
+                sino un hogar.
+
+            </div>
+
+        `;
+
+        await wait(5000);
+
+    }
+
+
+    // =====================================================
+    // MEMORIA 003
+    // PRIMERA VEZ QUE NOS VIMOS
+    // =====================================================
+
+
+    async function memoria003(terminal) {
+
+
+        terminal.innerHTML = `
+
+            <div class="gray fade">
+                > Recuperando memoria_003...
+            </div>
+
+        `;
+
+        await wait(1400);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_003
+                    </span>
+
+                    <span>
+                        21.03.2026
+                    </span>
+
+                </div>
+
+                <div class="date">
+                    LA PRIMERA VEZ
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(1800);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        MEMORIA_003
+                    </span>
+
+                    <span>
+                        21.03.2026
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Esta fue la primera vez
+                    que realmente estuvimos juntos
+                    frente a frente.
+
+                    <div class="story-space"></div>
+
+                    Habían pasado dos meses
+                    desde aquella primera noche.
+
+                    <div class="story-space"></div>
+
+                    Dos meses hablando todos los días.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4300);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        EVENTO
+                    </span>
+
+                    <span>
+                        DECISIÓN
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Tuvimos un malentendido.
+
+                    <div class="story-space"></div>
+
+                    Y en ese momento pude haber pensado
+                    que todo terminaría ahí.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4000);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        EVENTO
+                    </span>
+
+                    <span>
+                        DECISIÓN
+                    </span>
+
+                </div>
+
+                <div class="quote">
+
+                    Pero tú no te alejaste.
+
+                    <br><br>
+
+                    Fuiste a buscarme.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4000);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        EVENTO
+                    </span>
+
+                    <span>
+                        RESOLUCIÓN
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Fuiste hasta mi casa
+                    para encontrarme
+                    y resolver las cosas.
+
+                    <div class="story-space"></div>
+
+                    Y eso volvió a mostrarme
+                    el hombre que tenía frente a mí.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(4800);
+
+
+        terminal.innerHTML = `
+
+            <div class="big-message fade">
+
+                Me sentí como cuando llegas
+                a tu destino después
+                de un viaje largo.
+
+            </div>
+
+        `;
+
+        await wait(6000);
+
+
+        terminal.innerHTML = `
+
+            <div class="big-message fade">
+
+                Y entendí que todo lo que había vivido,
+                todo lo que había sentido
+                y todo el amor que alguna vez
+                había entregado...
+
+                <br><br>
+
+                había encontrado finalmente
+                su camino de regreso hacia mí.
+
+            </div>
+
+        `;
+
+        await wait(6000);
+
+    }
+
+
+    // =====================================================
+    // PERFIL
+    // LO QUE ELLA VE EN ÉL
+    // =====================================================
+
+
+    async function perfilDeEl(terminal) {
+
+
+        terminal.innerHTML = `
+
+            <div class="gray fade">
+                > Nuevo módulo detectado...
+            </div>
+
+            <div class="green fade">
+                [OK]
+            </div>
+
+            <div class="story-space"></div>
+
+            <div class="title fade">
+                ANÁLISIS
+            </div>
+
+            <div class="story fade">
+
+                El sistema ha intentado
+                clasificar el motivo
+                de esta memoria.
+
+                <br><br>
+
+                Resultado:
+
+            </div>
+
+        `;
+
+        await wait(3000);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        PERFIL
+                    </span>
+
+                    <span>
+                        DATOS NO CUANTIFICABLES
+                    </span>
+
+                </div>
+
+
+                <div class="profile">
+
+
+                    <div class="profile-item">
+
+                        <div class="profile-label">
+                            DEDICACIÓN
+                        </div>
+
+                        <div class="profile-value">
+                            Siempre busca entregar
+                            lo mejor de sí.
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <div class="profile-label">
+                            RESPONSABILIDAD
+                        </div>
+
+                        <div class="profile-value">
+                            Se toma en serio
+                            aquello que ama y aquello
+                            que se propone.
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <div class="profile-label">
+                            CREATIVIDAD
+                        </div>
+
+                        <div class="profile-value">
+                            Busca soluciones,
+                            crea, propone
+                            y encuentra caminos.
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <div class="profile-label">
+                            PERSEVERANCIA
+                        </div>
+
+                        <div class="profile-value">
+                            No se queda en el problema.
+                            Busca cómo resolverlo.
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="progress">
+
+                    <div class="progress-bar"></div>
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(5500);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        OBSERVACIÓN
+                    </span>
+
+                    <span>
+                        SIN MÉTRICA
+                    </span>
+
+                </div>
+
+                <div class="story">
+
+                    Hay algo que admiro profundamente
+                    de ti.
+
+                    <div class="story-space"></div>
+
+                    Me encanta verte tan centrado
+                    en lo que haces.
+
+                    <div class="story-space"></div>
+
+                    Me llena de orgullo verte trabajar,
+                    esforzarte y buscar siempre
+                    entregar tu mejor versión.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(5500);
+
+
+        terminal.innerHTML = `
+
+            <div class="big-message fade">
+
+                Estoy profundamente orgullosa de ti.
+
+            </div>
+
+        `;
+
+        await wait(4500);
+
+    }
+
+
+    // =====================================================
+    // LO QUE SIENTO
+    // =====================================================
+
+
+    async function loQueSiento(terminal) {
+
+
+        terminal.innerHTML = `
+
+            <div class="gray fade">
+                > Procesando información emocional...
+            </div>
+
+            <div class="green fade">
+                [NO CUANTIFICABLE]
+            </div>
+
+        `;
+
+        await wait(2200);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        ARCHIVO
+                    </span>
+
+                    <span>
+                        LO QUE SIENTO
+                    </span>
+
+                </div>
+
+                <div class="letter">
+
+                    <p>
+                        Te admiro muchísimo.
+                    </p>
+
+                    <p>
+                        Admiro la persona que eres,
+                        la manera en la que haces las cosas
+                        y la forma en la que persigues
+                        aquello que quieres.
+                    </p>
+
+                    <p>
+                        Me siento orgullosa de cada logro tuyo,
+                        pero también de todo aquello
+                        que nadie ve.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(6000);
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="letter">
+
+                    <p>
+                        Estoy orgullosa de tus días buenos,
+                        pero también de los días
+                        en los que las cosas no salen
+                        como esperabas y aun así
+                        buscas una solución.
+                    </p>
+
+                    <p>
+                        De tu disciplina.
+                        De tu creatividad.
+                        De tu forma de trabajar.
+                        De la pasión que pones
+                        en aquello que haces.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(6000);
+
+
+        terminal.innerHTML = `
+
+            <div class="big-message fade">
+
+                Quiero que nunca olvides
+                que hay alguien aquí
+                que mira todo lo que haces
+                y piensa:
+
+                <br><br>
+
+                <span class="green">
+                    "Qué orgullo verte crecer."
+                </span>
+
+            </div>
+
+        `;
+
+        await wait(6000);
+
+    }
+
+
+    // =====================================================
+    // HOGAR / FUTURO
+    // =====================================================
+
+
+    async function futuro(terminal) {
+
+
+        terminal.innerHTML = `
+
+            <div class="memory-card fade">
+
+                <div class="memory-header">
+
+                    <span class="memory-number">
+                        ESTADO
+                    </span>
+
+                    <span>
+                        DESTINO
+                    </span>
+
+                </div>
+
+                <div class="letter">
+
+                    <p>
+                        Cuando pienso en ti,
+                        no pienso solamente
+                        en todo lo que ya vivimos.
+                    </p>
+
+                    <p>
+                        Pienso en todo lo que todavía
+                        nos falta por vivir.
+                    </p>
+
+                    <p>
+                        En los lugares que todavía
+                        no conocemos.
+                    </p>
+
+                    <p>
+                        En los sueños que todavía
+                        no hemos construido.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(6500);
+
+
+        terminal.innerHTML = `
+
+            <div class="big-message fade">
+
+                Eres parte de mi presente,
+
+                <br><br>
+
+                pero también de todo
+                lo que imagino cuando pienso
+                en mi futuro.
+
+            </div>
+
+        `;
+
+        await wait(6500);
+
+
+        terminal.innerHTML = `
+
+            <div class="big-message fade">
+
+                Porque contigo
+                no solamente encontré
+                a alguien a quien amar.
+
+                <br><br>
+
+                Encontré un hogar.
+
+            </div>
+
+        `;
+
+        await wait(6500);
+
+    }
+
+
+    // =====================================================
+    // FINAL
+    // =====================================================
+
+
+    async function finalMessage(terminal) {
+
+
+        terminal.innerHTML = `
+
+            <div class="gray fade">
+                > Ejecutando archivo final...
+            </div>
+
+            <div class="green fade">
+                [OK]
+            </div>
+
+            <div class="story-space"></div>
+
+            <div class="gray fade">
+                > Cerrando sistema...
+            </div>
+
+        `;
+
+        await wait(2500);
+
+
+        terminal.innerHTML = `
+
+            <div class="letter fade">
+
+                <p>
+                    Y si llegaste hasta aquí,
+                    quiero que sepas algo.
+                </p>
+
+                <p>
+                    Este proyecto nunca fue realmente
+                    sobre fechas, recuerdos,
+                    archivos ni código.
+                </p>
+
+                <p>
+                    Todo eso solamente fue la forma
+                    que encontré para intentar guardar
+                    un poquito de todo lo que siento
+                    por ti.
+                </p>
+
+            </div>
+
+        `;
+
+        await wait(6000);
+
+
+        terminal.innerHTML = `
+
+            <div class="letter fade">
+
+                <p>
+                    Quiero que conmigo siempre tengas
+                    un lugar seguro.
+                </p>
+
+                <p>
+                    Quiero que sepas que puedes llegar
+                    a mí con tus días buenos,
+                    tus días malos,
+                    tus dudas,
+                    tus sueños
+                    y todo aquello que quieras construir.
+                </p>
+
+                <p>
+                    Quiero acompañarte.
+                </p>
+
+            </div>
+
+        `;
+
+        await wait(6500);
+
+
+        terminal.innerHTML = `
+
+            <div class="letter fade">
+
+                <p>
+                    Y quiero que sepas que estoy
+                    profundamente orgullosa de ti.
+                </p>
+
+                <p>
+                    De quien eres.
+                    De quien estás siendo.
+                    Y de quien todavía vas a llegar a ser.
+                </p>
+
+                <p>
+                    Gracias por haber llegado a mi vida
+                    de la manera más inesperada.
+                </p>
+
+            </div>
+
+        `;
+
+        await wait(6500);
+
+
+        terminal.innerHTML = `
+
+            <div class="final fade">
+
+                <div class="big-message">
+
+                    Si tuviera que volver
+                    al 31 de enero de 2026...
+
+                    <br><br>
+
+                    volvería a encontrarte.
+
+                </div>
+
+
+                <div class="story-space"></div>
+
+
+                <div class="green">
+
+                    PROJECT_310126
+
+                </div>
+
+
+                <div class="final-name">
+
+                    Con amor,
+
+                    <br><br>
+
+                    Mariana.
+
+                </div>
+
+            </div>
+
+        `;
+
+        await wait(7000);
+
+
+        terminal.innerHTML = `
+
+            <div class="final fade">
+
+                <div class="gray">
+                    PROJECT_310126
+                </div>
+
+                <div class="story-space"></div>
+
+                <div class="green">
+                    ESTADO: COMPLETADO
+                </div>
+
+                <br>
+
+                <div class="gray">
+                    Duración: ∞
+                </div>
+
+                <div class="gray">
+                    Dependencias: 1
+                </div>
+
+                <div class="gray">
+                    Vulnerabilidad conocida: AMOR
+                </div>
+
+                <div class="gray">
+                    Fecha de finalización: NO ENCONTRADA
+                </div>
+
+                <div class="story-space"></div>
+
+                <div class="big-message">
+
+                    Porque esta historia
+                    todavía no termina.
+
+                </div>
+
+                <div class="final-name">
+
+                    Te amo.
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    // =====================================================
+    // HISTORIA PRINCIPAL
+    // =====================================================
+
+
+    async function startStory() {
+
+        const terminal =
+            document.getElementById("story");
+
+
+        await memoria001(terminal);
+
+
+        await memoria002(terminal);
+
+
+        await memoria003(terminal);
+
+
+        await perfilDeEl(terminal);
+
+
+        await loQueSiento(terminal);
+
+
+        await futuro(terminal);
+
+
+        await finalMessage(terminal);
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>
